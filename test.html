@@ -1,0 +1,37 @@
+function removeEmptyRowsAndColumns() {
+const rows = table.querySelectorAll("tr");
+
+// Remove empty rows
+rows.forEach((row) => {
+const cells = row.querySelectorAll("td");
+
+const isEmpty = Array.from(cells).every((cell) => {
+const content = cell.textContent.trim();
+return content === "0" || content === ""; // Adjust based on actual content
+});
+
+if (isEmpty) {
+row.remove(); // Remove the empty row from the table
+}
+});
+
+// Remove empty columns
+const numColumns = rows[0].children.length; // Assuming all rows have the same number of columns
+
+for (let colIndex = 0; colIndex < numColumns; colIndex++) { let isColumnEmpty=true; rows.forEach((row)=> {
+    const cell = row.children[colIndex];
+    const content = cell.textContent.trim();
+
+    if (content !== "0" && content !== "") {
+    isColumnEmpty = false;
+    }
+    });
+
+    if (isColumnEmpty) {
+    rows.forEach((row) => {
+    const cell = row.children[colIndex];
+    cell.remove(); // Remove the cell in this column from all rows
+    });
+    }
+    }
+    }
